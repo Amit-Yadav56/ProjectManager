@@ -1,16 +1,23 @@
 import React from "react";
 import { Menu, Moon, Search, Settings, Sun, User } from "lucide-react";
 import Link from "next/link";
+import { useAppDispatch, useAppSelector } from "@/app/redux";
+import { setIsDarkMode, setIsSidebarOpen } from "@/state";
+import Image from "next/image";
 
 const Navbar = () => {
-  const isDarkMode = false;
+  const dispatch = useAppDispatch();
+  const isSidebarOpen = useAppSelector((state) => state.global.isSidebarOpen);
+  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   return (
     <div className="flex items-center justify-between bg-white px-4 py-3 dark:bg-black">
       {/* Search Bar */}
       <div className="flex items-center gap-8">
-        <button>
-          <Menu className="h-8 w-8 dark:text-white" />
-        </button>
+        {!isSidebarOpen ? null : (
+          <button onClick={() => dispatch(setIsSidebarOpen(!isSidebarOpen))}>
+            <Menu className="h-8 w-8 dark:text-white" />
+          </button>
+        )}
         <div className="relative flex h-min w-[200px]">
           <Search className="absolute top-1/2 left-[4px] mr-2 h-5 w-5 -translate-y-1/2 transform cursor-pointer dark:text-white" />
           <input
@@ -23,7 +30,14 @@ const Navbar = () => {
 
       {/* Icons */}
       <div className="flex items-center">
-        <button className={`rounded p-2 hover:bg-gray-100`}>
+        <button
+          onClick={() => dispatch(setIsDarkMode(!isDarkMode))}
+          className={
+            isDarkMode
+              ? `rounded p-2 dark:hover:bg-gray-700`
+              : `rounded p-2 hover:bg-gray-100`
+          }
+        >
           {isDarkMode ? (
             <Sun className="h-6 w-6 cursor-pointer dark:text-white" />
           ) : (

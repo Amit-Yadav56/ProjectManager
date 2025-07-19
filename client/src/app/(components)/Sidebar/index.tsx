@@ -1,4 +1,7 @@
 "use client";
+
+import { useAppDispatch, useAppSelector } from "@/app/redux";
+import { setIsSidebarOpen } from "@/state";
 import {
   AlertCircle,
   AlertOctagon,
@@ -22,13 +25,32 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
+interface Project {
+  id: number;
+  name: string;
+}
+
 const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setShowPriority] = useState(true);
+  const dispatch = useAppDispatch();
+  const isSidebarOpen = useAppSelector((state) => state.global.isSidebarOpen);
+
+  // Dummy projects data
+  const projects: Project[] = [
+    { id: 1, name: "E-Commerce Platform" },
+    { id: 2, name: "Mobile App Development" },
+    { id: 3, name: "Marketing Campaign" },
+    { id: 4, name: "Data Analytics Dashboard" },
+    { id: 5, name: "Customer Support Portal" },
+    { id: 6, name: "Inventory Management" },
+    { id: 7, name: "Social Media Integration" },
+    { id: 8, name: "Payment Gateway Setup" },
+  ];
 
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl
-    transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white
-  "w-64"}
+    transition-all duration-300 ease-in-out h-full z-40 dark:bg-black overflow-y-auto bg-white
+    ${isSidebarOpen ? "w-0 opacity-0 pointer-events-none" : "w-64 opacity-100"}
   `;
 
   return (
@@ -39,9 +61,16 @@ const Sidebar = () => {
           <div className="text-xl font-bold text-gray-800 dark:text-white">
             EDLIST
           </div>
-          <button className="py-3">
-            <X className="h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white" />
-          </button>
+          {isSidebarOpen ? null : (
+            <button
+              className="py-3"
+              onClick={() => {
+                dispatch(setIsSidebarOpen(!isSidebarOpen));
+              }}
+            >
+              <X className="h-6 w-6 text-gray-800 hover:text-gray-500 dark:text-white" />
+            </button>
+          )}
         </div>
         {/* TEAM */}
         <div className="flex items-center gap-5 border-y-[1.5px] border-gray-200 px-8 py-4 dark:border-gray-700">
@@ -78,6 +107,16 @@ const Sidebar = () => {
             <ChevronDown className="h-5 w-5" />
           )}
         </button>
+        {/* PROJECTS LIST */}
+        {showProjects &&
+          projects?.map((project) => (
+            <SidebarLink
+              key={project.id}
+              icon={Briefcase}
+              label={project.name}
+              href={`/projects/${project.id}`}
+            />
+          ))}
 
         {/* PRIORITIES LINKS */}
         <button
