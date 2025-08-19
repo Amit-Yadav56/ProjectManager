@@ -13,9 +13,15 @@ body,
 .app {
   height: 100%;
   width: 100%;
-  @apply bg-gray-500 text-sm text-gray-900;
+  @apply text-sm;
+  @apply bg-white;
+  @apply dark:bg-black;
 }
 
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
 /*
   Custom Twailwind CSS Variables
 */
@@ -33,7 +39,7 @@ body,
   --color-blue-200: #93c5fd;
   --color-blue-400: #60a5fa;
   --color-blue-500: #3b82f6;
-  --color-dark-bg: "#101214";
+  --color-dark-bg: #101214;
   --color-dark-secondary: "#1d1f21";
   --color-dark-tertiary: "#3b3d40";
   --color-blue-primary: #0275ff;
