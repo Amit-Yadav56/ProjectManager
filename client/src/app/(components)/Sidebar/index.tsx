@@ -2,6 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarOpen } from "@/state";
+import { useGetProjectsQuery } from "@/state/api";
 import {
   AlertCircle,
   AlertOctagon,
@@ -33,20 +34,9 @@ interface Project {
 const Sidebar = () => {
   const [showProjects, setShowProjects] = useState(true);
   const [showPriority, setShowPriority] = useState(true);
+  const { data: projects } = useGetProjectsQuery();
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector((state) => state.global.isSidebarOpen);
-
-  // Dummy projects data
-  const projects: Project[] = [
-    { id: 1, name: "E-Commerce Platform" },
-    { id: 2, name: "Mobile App Development" },
-    { id: 3, name: "Marketing Campaign" },
-    { id: 4, name: "Data Analytics Dashboard" },
-    { id: 5, name: "Customer Support Portal" },
-    { id: 6, name: "Inventory Management" },
-    { id: 7, name: "Social Media Integration" },
-    { id: 8, name: "Payment Gateway Setup" },
-  ];
 
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl
     transition-all duration-300 ease-in-out h-full z-40 dark:bg-black overflow-y-auto bg-white
