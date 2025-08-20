@@ -1,4 +1,5 @@
 import Header from "@/app/(components)/Header";
+import NewProjectModal from "@/app/(components)/NewProjectModal";
 import {
   Clock,
   Filter,
@@ -21,7 +22,10 @@ const ProjectHeader = (props: Props) => {
   const { activeTab, setActiveTab } = props;
   return (
     <div className="px-4 xl:px-6">
-      {/* Modal New Project */}
+      <NewProjectModal
+        isOpen={isModalNewProjectOpen}
+        onClose={() => setIsModalNewProjectOpen(false)}
+      />
       <div className="pt-6 pb-6 lg:pt-8 lg:pb-4">
         <Header
           name="Project Design Development"
