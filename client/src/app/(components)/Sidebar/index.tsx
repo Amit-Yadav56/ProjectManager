@@ -45,7 +45,7 @@ const Sidebar = () => {
 
   return (
     <div className={sidebarClassNames}>
-      <div className="flex h-[100%] w-full flex-col justify-start">
+      <div className="flex h-auto w-full flex-col justify-start">
         {/* TOP LOGO */}
         <div className="z-50 flex min-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
           <div className="text-xl font-bold text-gray-800 dark:text-white">
@@ -146,7 +146,7 @@ const Sidebar = () => {
           </>
         )}
       </div>
-      <div className="z-10 mt-32 flex w-full flex-col items-center gap-4 bg-white px-8 py-4 md:hidden dark:bg-black">
+      <div className="z-10 mt-8 flex w-full flex-col items-center gap-4 bg-white px-8 py-4 md:hidden dark:bg-black">
         <div className="flex w-full items-center">
           <div className="align-center flex h-9 w-9 justify-center">
             <User className="h-6 w-6 cursor-pointer self-center rounded-full dark:text-white" />
@@ -173,7 +173,7 @@ const SidebarLink = ({ href, icon: Icon, label }: SidebarLinkProps) => {
     pathname === href || (pathname === "/" && href === "/dashboard");
 
   return (
-    <Link href={href} className="w-full">
+    <Link href={href} className="h-auto w-full">
       <div
         className={`relative flex cursor-pointer items-center gap-3 transition-colors hover:bg-gray-100 dark:bg-black dark:hover:bg-gray-700 ${
           isActive ? "bg-gray-100 text-white dark:bg-gray-600" : ""

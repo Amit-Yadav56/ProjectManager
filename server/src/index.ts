@@ -8,6 +8,7 @@ import morgan from "morgan";
 // ROUTE IMPORTS
 import projectRoutes from "./routes/projectRoutes";
 import taskRoutes from "./routes/taskRoutes";
+import userRoutes from "./routes/userRoutes";
 
 // CONFIGURATIONS
 // a. Express-- Fast, minimalist web framework for Node.js to build your REST API
@@ -38,6 +39,7 @@ app.get("/", (req, res) => {
 
 app.use("/projects", projectRoutes);
 app.use("/tasks", taskRoutes);
+app.use("/users", userRoutes);
 
 // Server
 const port = process.env.PORT || 3000;

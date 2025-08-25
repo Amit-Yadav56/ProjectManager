@@ -58,7 +58,7 @@ export interface Task {
 export const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
-  tagTypes: ["Projects", "Tasks"],
+  tagTypes: ["Projects", "Tasks", "Users"],
   endpoints: (builder) => ({
     getProjects: builder.query<Project[], void>({
       query: () => "projects",
@@ -100,6 +100,10 @@ export const api = createApi({
         { type: "Tasks", id: taskId },
       ],
     }),
+    getUsers: builder.query<User[], void>({
+      query: () => `users`,
+      providesTags: ["Users"],
+    }),
   }),
 });
 
@@ -109,4 +113,5 @@ export const {
   useGetTasksQuery,
   useUpdateTaskStatusMutation,
   useCreateTaskMutation,
+  useGetUsersQuery,
 } = api;

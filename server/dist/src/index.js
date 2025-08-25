@@ -12,6 +12,7 @@ const morgan_1 = __importDefault(require("morgan"));
 // ROUTE IMPORTS
 const projectRoutes_1 = __importDefault(require("./routes/projectRoutes"));
 const taskRoutes_1 = __importDefault(require("./routes/taskRoutes"));
+const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 // CONFIGURATIONS
 // a. Express-- Fast, minimalist web framework for Node.js to build your REST API
 const app = (0, express_1.default)();
@@ -34,6 +35,7 @@ app.get("/", (req, res) => {
 });
 app.use("/projects", projectRoutes_1.default);
 app.use("/tasks", taskRoutes_1.default);
+app.use("/users", userRoutes_1.default);
 // Server
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
