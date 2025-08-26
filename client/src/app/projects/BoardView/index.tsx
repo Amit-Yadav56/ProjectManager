@@ -1,5 +1,4 @@
 import {
-  Priority,
   Task as TaskType,
   useGetTasksQuery,
   useUpdateTaskStatusMutation,
