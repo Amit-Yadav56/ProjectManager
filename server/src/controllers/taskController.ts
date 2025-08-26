@@ -84,3 +84,26 @@ export const updateTaskStatus = async (
     res.status(500).json("Could not update the tasks");
   }
 };
+
+export const getUserTasks = async (req: Request, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const tasks = await prisma.task.findMany({
+      where: {
+        OR: [
+          { authorUserId: Number(userId) },
+          { assignedUserId: Number(userId) },
+        ],
+        // checks if the task has the author or the assignee as the current user using OR
+      },
+      include: {
+        author: true,
+        assignee: true,
+      },
+    });
+
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: `Unable to create a new Task: ${error}` });
+  }
+};
