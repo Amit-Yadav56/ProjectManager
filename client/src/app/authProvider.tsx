@@ -1,6 +1,7 @@
 import React from "react";
 import { Authenticator } from "@aws-amplify/ui-react";
 import { Amplify } from "aws-amplify";
+import { AuthUser } from "aws-amplify/auth";
 import "@aws-amplify/ui-react/styles.css";
 
 interface AuthProviderProps {
@@ -50,7 +51,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   return (
     <div>
       <Authenticator formFields={formFields}>
-        {({ user }: { user?: any }) =>
+        {({ user }: { user?: AuthUser }) =>
           user ? (
             <div>{children}</div>
           ) : (
