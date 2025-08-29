@@ -18,7 +18,7 @@ const columns: GridColDef[] = [
       <div className="flex h-full w-full items-center justify-center">
         <div className="h-9 w-9">
           <Image
-            src={`/${params.value}`}
+            src={`https://project-manager-s3-images-56.s3.ap-south-1.amazonaws.com/${params.value}`}
             alt={params.row.username}
             width={100}
             height={50}
