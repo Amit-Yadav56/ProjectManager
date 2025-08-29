@@ -2,9 +2,7 @@
 import { useGetUsersQuery } from "@/state/api";
 import React from "react";
 
-type Props = {};
-
-const Search = (props: Props) => {
+const Search = () => {
   const { data: users, isLoading, isError } = useGetUsersQuery();
   if (isLoading) return <div>Loading...</div>;
   if (isError || !users)

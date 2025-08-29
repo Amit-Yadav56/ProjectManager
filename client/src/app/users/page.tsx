@@ -3,12 +3,7 @@ import { useGetUsersQuery } from "@/state/api";
 import React from "react";
 import { useAppSelector } from "../redux";
 import Header from "@/app/(components)/Header";
-import {
-  DataGrid,
-  GridColDef,
-  Toolbar,
-  FilterPanelTrigger,
-} from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Image from "next/image";
 import { dataGridClassNames, dataGridSxStyles } from "@/lib/utils";
 
