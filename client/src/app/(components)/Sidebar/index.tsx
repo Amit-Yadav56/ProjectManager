@@ -3,6 +3,7 @@
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarOpen } from "@/state";
 import { useGetProjectsQuery } from "@/state/api";
+import { signOut } from "aws-amplify/auth";
 import {
   AlertCircle,
   AlertOctagon,
@@ -37,6 +38,14 @@ const Sidebar = () => {
     transition-all duration-300 ease-in-out h-full z-40 dark:bg-black overflow-y-auto bg-white
     ${isSidebarOpen ? "w-0 opacity-0 pointer-events-none" : "w-64 opacity-100"}
   `;
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
 
   return (
     <div className={sidebarClassNames}>
@@ -152,7 +161,10 @@ const Sidebar = () => {
             <User className="h-6 w-6 cursor-pointer self-center rounded-full dark:text-white" />
           </div>
           <span className="mx-3 text-gray-800 dark:text-white">Name</span>
-          <button className="self-start rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block">
+          <button
+            className="self-start rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block"
+            onClick={handleSignOut}
+          >
             Sign out
           </button>
         </div>

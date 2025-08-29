@@ -3,11 +3,20 @@ import { Menu, Moon, Search, Settings, Sun, User } from "lucide-react";
 import Link from "next/link";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsDarkMode, setIsSidebarOpen } from "@/state";
+import { signOut } from "aws-amplify/auth";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const isSidebarOpen = useAppSelector((state) => state.global.isSidebarOpen);
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
   return (
     <div className="flex items-center justify-between bg-white px-4 py-3 dark:bg-black">
       {/* Search Bar */}
@@ -59,7 +68,10 @@ const Navbar = () => {
             <User className="h-6 w-6 cursor-pointer self-center rounded-full dark:text-white" />
           </div>
           <span className="mx-3 text-gray-800 dark:text-white">Name</span>
-          <button className="hidden rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block">
+          <button
+            className="hidden rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block"
+            onClick={handleSignOut}
+          >
             Sign out
           </button>
         </div>
