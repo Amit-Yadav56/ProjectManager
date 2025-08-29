@@ -2,7 +2,8 @@
 
 import React, { useEffect } from "react";
 import Navbar from "@/app/(components)/Navbar";
-import Sidebar from "./(components)/Sidebar";
+import Sidebar from "@/app/(components)/Sidebar";
+import AuthProvider from "./authProvider";
 import StoreProvider, { useAppSelector } from "./redux";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
@@ -17,7 +18,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [isDarkMode]);
+  });
 
   return (
     <div className="flex min-h-screen w-full bg-gray-50 text-gray-900">
@@ -34,12 +35,14 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const dashboardWrapper = ({ children }: { children: React.ReactNode }) => {
+const DashboardWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <StoreProvider>
-      <DashboardLayout>{children}</DashboardLayout>
+      <AuthProvider>
+        <DashboardLayout>{children}</DashboardLayout>
+      </AuthProvider>
     </StoreProvider>
   );
 };
 
-export default dashboardWrapper;
+export default DashboardWrapper;
